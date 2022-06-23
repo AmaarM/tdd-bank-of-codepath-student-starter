@@ -2,24 +2,12 @@ import * as React from "react";
 import "./AddTransaction.css";
 
 export default function AddTransaction(props) {
+  let descrption = "";
+  let category = "";
+  let amount = 0;
+
   function handleOnFormFieldChange(e) {
-    let name = "";
-    let category = "";
-    let amount = 0;
-    if (e.target.name === "name") {
-      name = e.target.value;
-    }
-    if (e.target.name === "category") {
-      category = e.target.value;
-    }
-    if (e.target.name === "amount") {
-      amount = e.target.value;
-    }
-
-    let newForm = { name: name, category: category, amount: amount };
-
-    console.log(newForm);
-    props.setForm(newForm);
+    props.setForm(prevObj => ({...prevObj, [e.target.name] : e.target.value}));
   }
 
   return (
@@ -43,8 +31,10 @@ export function AddTransactionForm(props) {
         <div className="field">
           <label>Description</label>
           <input
-            placeholder="name"
-            name="name"
+            placeholder="description"
+            name="description"
+            type="text"
+            value={props.form ? props.form.description : ""}
             onChange={props.handleOnFormFieldChange}
           />
         </div>
@@ -53,7 +43,9 @@ export function AddTransactionForm(props) {
           <input
             placeholder="category"
             name="category"
+            type="text"
             onChange={props.handleOnFormFieldChange}
+            value={props.form ? props.form.category : ""}
           />
         </div>
         <div className="field half-flex">
@@ -61,11 +53,17 @@ export function AddTransactionForm(props) {
           <input
             placeholder="amount"
             name="amount"
+            type="number"
             onChange={props.handleOnFormFieldChange}
+            value={props.form ? props.form.amount : ""}
           />
         </div>
 
-        <button className="btn add-transaction" type="submit">
+        <button
+          className="btn add-transaction"
+          type="submit"
+          onClick={props.handleOnSubmit}
+        >
           Add
         </button>
       </div>

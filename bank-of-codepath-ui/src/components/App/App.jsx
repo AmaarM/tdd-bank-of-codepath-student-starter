@@ -13,7 +13,7 @@ export default function App() {
   const [filterInputValue, setFilterInputValue] = React.useState(""); 
   const [newTransactionForm, setNewTransactionForm] = React.useState({category: "", description: "", amount: 0});
   const [isCreating, setIsCreating] = React.useState(false);
-  
+  console.log(transactions)
   return (
     <div className="App">
       <nav className="app">
